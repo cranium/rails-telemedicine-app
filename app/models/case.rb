@@ -3,4 +3,6 @@ class Case < ActiveRecord::Base
   has_many :consults
   has_many :posts
   has_many :consultants, through: :consults, source: :user
+
+  accepts_nested_attributes_for :posts
 end
