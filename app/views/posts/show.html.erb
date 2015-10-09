@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @case_thread.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @case_thread.user_id %>
+</p>
+
+<% @case_thread.posts.each do | post | %>
+	<%= post.posttext %>
+<% end %>
+
+<%= form_for(@post) do |f| %>
+	<%= f.label :posttext %>
+	<%= f.text_field :posttext %>
+	<%= f.submit %>
+<% end %>
+
+<%= link_to 'Edit', edit_case_thread_path(@case_thread) %> |
+<%= link_to 'Back', case_threads_path %>

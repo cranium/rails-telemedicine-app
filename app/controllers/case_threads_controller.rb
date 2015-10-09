@@ -11,12 +11,13 @@ class CaseThreadsController < ApplicationController
   # GET /thread/1
   # GET /thread/1.json
   def show
+    @post = @case_thread.posts.all
   end
 
   # GET /thread/new
   def new
     @case_thread = CaseThread.new
-    @post = Post.new
+    @post = @case_thread.posts.build
   end
 
   # GET /thread/1/edit
@@ -27,6 +28,7 @@ class CaseThreadsController < ApplicationController
   # POST /thread.json
   def create
     @case_thread = CaseThread.new(case_thread_params)
+    @case_thread.user = current_user
 
     respond_to do |format|
       if @case_thread.save
@@ -65,12 +67,16 @@ class CaseThreadsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_case_thread
       @case_thread = CaseThread.find(params[:id])
+      if @case_thread.user != current_user
+        render :file => 'public/500.html', :status => :forbidden, :layout => false
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def case_thread_params
-      params.require(:case_thread).permit(:title, :user_id)
+      params.require(:case_thread).permit(:title, :posts_attributes => [:posttext])
     end
 end
