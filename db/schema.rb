@@ -11,35 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006230210) do
+ActiveRecord::Schema.define(version: 20151008172626) do
 
-  create_table "cases", force: :cascade do |t|
+  create_table "case_threads", force: :cascade do |t|
+    t.text     "title"
     t.integer  "user_id"
-    t.text     "symptomtext"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "consults", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "case_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "case_thread_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "photos", force: :cascade do |t|
-    t.integer  "case_id"
+    t.integer  "case_thread_id"
     t.string   "filename"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "case_id"
+    t.integer  "case_thread_id"
     t.integer  "user_id"
     t.text     "posttext"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|

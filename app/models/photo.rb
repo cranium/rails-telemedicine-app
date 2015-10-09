@@ -1,4 +1,4 @@
 class Photo < ActiveRecord::Base
   belongs_to :post
-  has_one :cases, :through => :posts
+  has_one :thread, :through => :posts
 end

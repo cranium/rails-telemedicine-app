@@ -1,4 +1,4 @@
 class Consult < ActiveRecord::Base
   belongs_to :user
-  belongs_to :case
+  belongs_to :thread
 end

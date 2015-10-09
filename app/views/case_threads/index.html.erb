@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Cases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @case_threads.each do | case_thread | %>
+      <tr>
+        <td><%= case_thread.title %></td>
+        <td><%= case_thread.user_id %></td>
+        <td><%= link_to 'Show', case_thread %></td>
+        <td><%= link_to 'Edit', edit_case_thread_path(case_thread) %></td>
+        <td><%= link_to 'Destroy', case_thread, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Case', new_case_thread_path %>

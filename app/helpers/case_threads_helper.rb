@@ -1,0 +1,2 @@
+module CaseThreadsHelper
+end
