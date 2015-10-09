@@ -1,10 +1,10 @@
-<%= form_for(@case) do |f| %>
-  <% if @case.errors.any? %>
+<%= form_for(@case_thread) do |f| %>
+  <% if @case_thread.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@case.errors.count, "error") %> prohibited this case from being saved:</h2>
+      <h2><%= pluralize(@case_thread.errors.count, "error") %> prohibited this case from being saved:</h2>
 
       <ul>
-      <% @case.errors.full_messages.each do |message| %>
+      <% @case_thread.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -19,6 +19,12 @@
     <%= f.label :user_id %><br>
     <%= f.number_field :user_id %>
   </div>
+
+    <%= f.fields_for :posts do |posts_form| %>
+        <%= posts_form.label :posttext %>
+        <%= posts_form.text_field :posttext %>
+    <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

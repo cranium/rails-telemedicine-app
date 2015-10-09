@@ -1,10 +1,11 @@
 class CaseThreadsController < ApplicationController
-  before_action :set_thread, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_case_thread, only: [:show, :edit, :update, :destroy]
 
   # GET /thread
   # GET /thread.json
   def index
-    @case_thread = CaseThread.all
+    @case_thread = current_user.case_threads
   end
 
   # GET /thread/1
@@ -15,6 +16,7 @@ class CaseThreadsController < ApplicationController
   # GET /thread/new
   def new
     @case_thread = CaseThread.new
+    @post = Post.new
   end
 
   # GET /thread/1/edit
@@ -41,7 +43,7 @@ class CaseThreadsController < ApplicationController
   # PATCH/PUT /thread/1.json
   def update
     respond_to do |format|
-      if @case_thread.update(thread_params)
+      if @case_thread.update(case_thread_params)
         format.html { redirect_to @case_thread, notice: 'thread was successfully updated.' }
         format.json { render :show, status: :ok, location: @case_thread }
       else
@@ -56,7 +58,7 @@ class CaseThreadsController < ApplicationController
   def destroy
     @case_thread.destroy
     respond_to do |format|
-      format.html { redirect_to case_thread_url, notice: 'thread was successfully destroyed.' }
+      format.html { redirect_to case_threads_url, notice: 'thread was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
